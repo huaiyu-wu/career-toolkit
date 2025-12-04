@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Career Toolkit Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #070b18;
+      --bg-alt: #0f172a;
+      --card: #111827;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.18);
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
+      --transition-fast: 180ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d253a 0, #020617 45%, #020617 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.92),
+        rgba(2, 6, 23, 0.78),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .logo-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #6366f1, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      padding: 0.3rem 0.1rem;
+      border-radius: 999px;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: #f9fafb;
+    }
+
+    .cta-chip {
+      padding: 0.28rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      background: radial-gradient(circle at top, #4f46e5, transparent);
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    main {
+      padding-bottom: 4rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw + 1rem, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #818cf8, #22c55e);
+      color: transparent;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      max-width: 34rem;
+      font-size: 0.97rem;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.78rem;
+    }
+
+    .pill {
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-card {
+      border-radius: 22px;
+      padding: 1.4rem 1.5rem 1.3rem;
+      background: radial-gradient(circle at top left, #1e293b, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-card-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .hero-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      padding: 0.12rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      color: #c7d2fe;
+    }
+
+    /* Sections */
+    section {
+      margin-top: 2.3rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 30rem;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #cbd5f5;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* Cards */
+    .card {
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.1rem 1rem;
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 25px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast),
+        background 220ms ease-out;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: radial-gradient(
+        circle at top,
+        rgba(79, 70, 229, 0.22),
+        transparent 60%
+      );
+      transition: opacity var(--transition-fast);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.65);
+      border-color: rgba(129, 140, 248, 0.7);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.45rem;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .card-pill {
+      font-size: 0.7rem;
+      padding: 0.16rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+    }
+
+    .card-body {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .link-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.32rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.9);
+      cursor: pointer;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .link-chip span.icon {
+      font-size: 0.83rem;
+    }
+
+    .link-chip:hover {
+      border-color: rgba(129, 140, 248, 0.9);
+      background: rgba(30, 64, 175, 0.72);
+      transform: translateY(-1px);
+    }
+
+    .link-chip.external::after {
+      content: "↗";
+      font-size: 0.7rem;
+      opacity: 0.75;
+      margin-left: 0.05rem;
+    }
+
+    /* Sector filter buttons */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .filter-btn {
+      font-size: 0.78rem;
+      padding: 0.32rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .filter-btn.active {
+      background: var(--accent-soft);
+      border-color: rgba(129, 140, 248, 0.9);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .sector-card[data-hidden="true"] {
+      display: none;
+    }
+
+    footer {
+      padding: 2.5rem 0 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(148, 163, 184, 0.15);
+      margin-top: 2.5rem;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.8), transparent);
+    }
+
+    footer a {
+      color: #a5b4fc;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero {
+        padding-top: 1.7rem;
+      }
+      .nav-inner {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      .nav-links {
+        font-size: 0.82rem;
+        gap: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <div class="logo">
+        <span class="logo-badge">★</span>
+        <span>Career Toolkit Hub</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#warwick">Warwick resources</a>
+        <a href="#sectors">Sectors</a>
+        <span class="cta-chip">For first-years &amp; starters ✨</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title">
+            Not sure where to start with your <span>career?</span>
+          </h1>
+          <p class="hero-sub">
+            Use this page to discover the most useful <strong>Warwick</strong> and
+            <strong>external</strong> resources for finance, tech, law, consulting,
+            life sciences and more. Everything in one place, designed for
+            first-years and anyone feeling a bit lost.
+          </p>
+          <div class="hero-pills">
+            <span class="pill">🎯 Beginner-friendly</span>
+            <span class="pill">📚 Curated resources</span>
+            <span class="pill">🗂️ Track with your society’s toolkit</span>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <h2 class="hero-card-title">How to use this hub</h2>
+          <ul class="hero-list">
+            <li>
+              <span>1. Start with Warwick resources</span>
+              <span class="hero-tag">Foundation</span>
+            </li>
+            <li>
+              <span>2. Pick a sector below</span>
+              <span class="hero-tag">Explore</span>
+            </li>
+            <li>
+              <span>3. Open 1–2 links &amp; save them</span>
+              <span class="hero-tag">Focus</span>
+            </li>
+            <li>
+              <span>4. Add them to your tracker</span>
+              <span class="hero-tag">Organise</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Warwick resources -->
+    <section id="warwick">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Warwick resources</h2>
+          <p class="section-sub">
+            Free tools you already have through Warwick. These are the best starting
+            points if you’re not sure what to do first.
+          </p>
+        </div>
+        <span class="badge">Provided by Warwick 🎓</span>
+      </div>
+
+      <div class="grid grid-2">
+        <!-- LinkedIn Learning -->
+        <article class="card">
+          <div class="card-header">
+            <h3 class="card-title">LinkedIn Learning</h3>
+            <span class="card-pill">Skills &amp; certificates</span>
+          </div>
+          <p class="card-body">
+            Thousands of courses on Excel, Power BI, Python, communication,
+            presentations and more — all free with your Warwick login. Add
+            completed courses and certificates straight to your CV and LinkedIn.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://www.linkedin.com/learning/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📘</span>
+              <span>Open LinkedIn Learning</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- FT & Economist -->
+        <article class="card">
+          <div class="card-header">
+            <h3 class="card-title">FT &amp; The Economist</h3>
+            <span class="card-pill">Commercial awareness</span>
+          </div>
+          <p class="card-body">
+            Free access to the Financial Times and The Economist through Warwick.
+            Use them to build commercial awareness for finance, consulting, law
+            and policy interviews.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://www.ft.com"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📰</span>
+              <span>Financial Times</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.economist.com"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🌍</span>
+              <span>The Economist</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- MyAdvantage -->
+        <article class="card">
+          <div class="card-header">
+            <h3 class="card-title">MyAdvantage</h3>
+            <span class="card-pill">Events &amp; opportunities</span>
+          </div>
+          <p class="card-body">
+            Warwick’s central careers platform. Find Spring Weeks, internships,
+            part-time roles, employer events, workshops and 1:1 careers appointments
+            in one place.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://myadvantage.warwick.ac.uk"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🎓</span>
+              <span>Open MyAdvantage</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Career fairs -->
+        <article class="card">
+          <div class="card-header">
+            <h3 class="card-title">Warwick career fairs</h3>
+            <span class="card-pill">Meet employers</span>
+          </div>
+          <p class="card-body">
+            Autumn Career Fair, Finance Fair, Tech &amp; Engineering and more.
+            Discover different industries, ask questions and start networking
+            with recruiters and analysts.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://warwick.ac.uk/services/careers"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🤝</span>
+              <span>Careers service page</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sector resources -->
+    <section id="sectors">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Sector-specific resources</h2>
+          <p class="section-sub">
+            Pick a sector you’re curious about and explore a few high-impact
+            platforms. You don’t need to use everything — 1–2 well-chosen
+            resources is enough to start.
+          </p>
+        </div>
+        <span class="badge">Filter by interest 🔍</span>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All sectors</button>
+        <button class="filter-btn" data-filter="finance">Finance</button>
+        <button class="filter-btn" data-filter="tech">Tech</button>
+        <button class="filter-btn" data-filter="law">Law</button>
+        <button class="filter-btn" data-filter="consulting">Consulting</button>
+        <button class="filter-btn" data-filter="lifesciences">Life sciences</button>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- Finance -->
+        <article class="card sector-card" data-sector="finance">
+          <div class="card-header">
+            <h3 class="card-title">Finance</h3>
+            <span class="card-pill">IB, markets, AM</span>
+          </div>
+          <p class="card-body">
+            Great if you’re exploring investment banking, markets, asset
+            management or fintech and want structured introductions plus
+            CV-worthy experience.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://www.brightnetwork.co.uk/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">💡</span>
+              <span>Bright Network Finance</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.theforage.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📊</span>
+              <span>Forage virtual internships</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.gainuk.org/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📈</span>
+              <span>GAIN (Girls Are Investors)</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.seo-london.org/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🚀</span>
+              <span>SEO London</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Tech -->
+        <article class="card sector-card" data-sector="tech">
+          <div class="card-header">
+            <h3 class="card-title">Tech</h3>
+            <span class="card-pill">Software &amp; data</span>
+          </div>
+          <p class="card-body">
+            Ideal for software, data, AI or product roles. Start with beginner-friendly
+            coding practice and build towards interview-style questions.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://leetcode.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">💻</span>
+              <span>LeetCode</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.hackerrank.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🧩</span>
+              <span>HackerRank</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.w3schools.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🌐</span>
+              <span>W3Schools</span>
+            </a>
+            <a class="link-chip external"
+               href="https://brilliant.org/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">✨</span>
+              <span>Brilliant.org</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Law -->
+        <article class="card sector-card" data-sector="law">
+          <div class="card-header">
+            <h3 class="card-title">Law</h3>
+            <span class="card-pill">Commercial &amp; beyond</span>
+          </div>
+          <p class="card-body">
+            For students interested in commercial law, training contracts and
+            vacation schemes, or just figuring out whether law is right for them.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://www.brightnetwork.co.uk/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📚</span>
+              <span>Bright Network Law</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.theforage.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">⚖️</span>
+              <span>Forage law programmes</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.chambersstudent.co.uk/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📖</span>
+              <span>Chambers Student</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.legalcheek.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📰</span>
+              <span>Legal Cheek</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Consulting -->
+        <article class="card sector-card" data-sector="consulting">
+          <div class="card-header">
+            <h3 class="card-title">Consulting</h3>
+            <span class="card-pill">Strategy &amp; advisory</span>
+          </div>
+          <p class="card-body">
+            Good starting point if you’re curious about strategy, management or
+            economic consulting and want to try case-style thinking.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://www.brightnetwork.co.uk/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">💡</span>
+              <span>Bright Network Consulting</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.theforage.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📊</span>
+              <span>BCG / Accenture Forage</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.casecoach.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">📈</span>
+              <span>CaseCoach (resources)</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.preplounge.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🤝</span>
+              <span>PrepLounge</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Life sciences -->
+        <article class="card sector-card" data-sector="lifesciences">
+          <div class="card-header">
+            <h3 class="card-title">Life sciences</h3>
+            <span class="card-pill">Pharma &amp; biotech</span>
+          </div>
+          <p class="card-body">
+            Ideal for students interested in pharma, biotech, research or
+            healthcare consulting and wanting to understand the industry better.
+          </p>
+          <div class="card-links">
+            <a class="link-chip external"
+               href="https://www.brightnetwork.co.uk/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🧬</span>
+              <span>Bright Network Life Sciences</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.theforage.com/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🧪</span>
+              <span>Forage (GSK / Pfizer)</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.coursera.org/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🎓</span>
+              <span>Coursera biotech &amp; health</span>
+            </a>
+            <a class="link-chip external"
+               href="https://www.nature.com/naturecareers"
+               target="_blank" rel="noopener noreferrer">
+              <span class="icon">🌱</span>
+              <span>Nature Careers</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        Tip: Don’t try to use every platform at once. Pick
+        <strong>one or two</strong> that match your goals, save them to your
+        society’s tracker or Notion, and build from there.
+      </p>
+      <p style="margin-top: 0.6rem;">
+        Built for students who are just getting started with careers — especially
+        first-years who want clarity, structure and good resources in one place.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple sector filter
+    const buttons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".sector-card");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
+
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        cards.forEach((card) => {
+          if (filter === "all") {
+            card.dataset.hidden = "false";
+          } else {
+            card.dataset.hidden =
+              card.dataset.sector === filter ? "false" : "true";
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
